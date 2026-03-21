@@ -1,4 +1,4 @@
-// ========================================
+﻿// ========================================
 // MAISON DECOR - Main JavaScript
 // ========================================
 
@@ -27,20 +27,20 @@ function updateThemeIcon(theme) {
 
 // ===== CURRENCY CONVERTER =====
 const rates = {
-    USD: 1,    KES: 130,  EUR: 0.92, GBP: 0.79,
+    USD: 1,    KES: 1,  EUR: 0.92, GBP: 0.79,
     TZS: 2500, UGX: 3700, ZAR: 18.5, NGN: 1550,
     GHS: 12,   CAD: 1.36, AUD: 1.53, INR: 83,
     AED: 3.67, CNY: 7.24
 };
 const symbols = {
-    USD: '$',    KES: 'KES ', EUR: '€',   GBP: '£',
-    TZS: 'TZS ', UGX: 'UGX ', ZAR: 'R',  NGN: '₦',
-    GHS: 'GH₵',  CAD: 'CA$', AUD: 'AU$', INR: '₹',
-    AED: 'AED ', CNY: '¥'
+    USD: '$',    KES: 'KES ', EUR: 'â‚¬',   GBP: 'Â£',
+    TZS: 'TZS ', UGX: 'UGX ', ZAR: 'R',  NGN: 'â‚¦',
+    GHS: 'GHâ‚µ',  CAD: 'CA$', AUD: 'AU$', INR: 'â‚¹',
+    AED: 'AED ', CNY: 'Â¥'
 };
 
 function initCurrency() {
-    const saved = localStorage.getItem('currency') || 'USD';
+    const saved = localStorage.getItem('currency') || 'KES';
     const select = document.getElementById('currencySelect');
     if (select) select.value = saved;
     if (saved !== 'USD') convertPrices(saved);
@@ -208,3 +208,4 @@ document.addEventListener('DOMContentLoaded', function() {
     initCurrency();
     initScrollAnimations();
 });
+

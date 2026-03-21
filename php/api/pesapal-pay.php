@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/../../php/config/database.php';
 require_once __DIR__ . '/../../php/config/helpers.php';
 
@@ -9,7 +9,7 @@ define('PESAPAL_KEY',    'C8TZjcIAJdSZDxx1W6BmJllzJZAwY1Rs');
 define('PESAPAL_SECRET', 'HCqgetjZyMcd4z+ms8zde8qYqYQ=');
 define('PESAPAL_ENV',    'live');
 
-// FIX 1: Use the correct live endpoint (not pay.pesapal.com/v3 — that's the iframe host)
+// FIX 1: Use the correct live endpoint (not pay.pesapal.com/v3 â€” that's the iframe host)
 $baseUrl     = 'https://pay.pesapal.com/v3';
 $callbackUrl = SITE_URL . '/pages/order-success.php';
 $ipnUrl      = SITE_URL . '/php/api/pesapal-ipn.php';
@@ -43,7 +43,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 // FIX 2: Normalize phone to international format (Pesapal requires 254XXXXXXXXX)
 $phone = preg_replace('/\D/', '', $phone);          // strip non-digits
 if (substr($phone, 0, 1) === '0') {
-    $phone = '254' . substr($phone, 1);             // 07XX → 2547XX
+    $phone = '254' . substr($phone, 1);             // 07XX â†’ 2547XX
 }
 if (substr($phone, 0, 3) !== '254') {
     $phone = '254' . $phone;
@@ -64,12 +64,12 @@ foreach ($cartItems as $item) {
     $subtotal += $price * (int)$item['quantity'];
 }
 
-// Prices stored in USD — convert to KES for Pesapal (1 USD = 130 KES)
-define('KES_RATE', 130);
-$subtotalKes = round($subtotal * KES_RATE, 2);
+// Prices stored in USD â€” convert to KES for Pesapal (1 USD = 130 KES)
+
+$subtotalKes = round($subtotal, 2);
 
 // Free shipping on orders over KES 5000 (~$38 USD), otherwise KES 350 shipping
-$shipping    = $subtotalKes >= 5000 ? 0 : 350;
+$shipping    = $subtotalKes >= 500 ? 0 : 50;
 $total       = round($subtotalKes + $shipping, 2); // Total in KES for Pesapal
 
 function pesapalRequest($url, $payload, $token = null, $method = 'POST') {
@@ -146,7 +146,7 @@ if ($storedIpn && !empty($storedIpn['setting_value'])) {
     }
 }
 
-// IPN registration can fail on localhost — we allow it to continue without one
+// IPN registration can fail on localhost â€” we allow it to continue without one
 // but log it so you know
 if (!$ipnId) {
     error_log('[Pesapal] Warning: IPN registration failed. Orders will process but IPN callbacks may not work.');
